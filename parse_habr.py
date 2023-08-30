@@ -3,6 +3,7 @@ from lxml import etree
 import time as t
 import os
 
+# import requests
 import requests
 from bs4 import BeautifulSoup
 
@@ -95,7 +96,6 @@ class Document:
     self.set_hubs(list_of_hubs)
     self.set_tags(list_of_tags)
   
-    # наверное стоит проверять длину
     if self.list_of_keywords:
       self.check_hub_existence(self.data['hubs'], self.list_of_keywords)
     
@@ -115,7 +115,7 @@ class Document:
   def make_document(self, text, path, format):
     filepath = os.path.join(path, 'text_{}.{}'.format(self.number, format))
     if not os.path.exists(filepath):
-      with open (filepath, 'w') as file:
+      with open (filepath, 'w', encoding="utf-8") as file:
         lines = []
         prev_line = ''
         for line in text:
@@ -159,24 +159,3 @@ class Document:
       self.compare_hubs()
     if not self.error:
       self.extract_text()
-
-# ------- exapmle for one page -------
-number = 692272
-txt_path = './'
-html_path = './'
-list_of_keywords = ['Natural Language Processing', 'Artificial Intelligence',
-                    'Искусственный интеллект']
-dict_of_keywords = {'Data Mining' : ['Machine learning', 'Машинное обучение',
-                                     'Семантика', 'Semantics'],
-                    'Big Data' : ['Machine learning', 'Машинное обучение',
-                                  'Семантика', 'Semantics'],
-                    'Поисковые технологии' : ['Data Mining', 'Machine learning',
-                                              'Машинное обучение', 'Big Data']}
-
-document = Document(number)
-document.set_txt_path(txt_path)
-document.set_html_path(html_path)
-document.set_list_of_keywords(list_of_keywords)
-document.set_dict_of_keywords_used_together(dict_of_keywords)
-document.process()
-
