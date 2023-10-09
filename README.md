@@ -27,7 +27,7 @@
 
 Перед использованием необходимо убедиться, что установлен модуль Requests. Если нет, то воспользуйтесь командой:
 
-``` pip install requests ```
+``` pip install -r requirements.txt```
 
 ## Ссылка на оригинальный файл
     https://colab.research.google.com/drive/13S76mhPxaaNy_IgnJU--CnQRgW6n5Ueo
